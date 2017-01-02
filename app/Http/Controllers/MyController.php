@@ -1,18 +1,16 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 namespace App\Http\Controllers;
+use App\Prova;
 
-/**
- * Description of MyController
- *
- * @author Massy
- */
-class MyController {
+class MyController  extends Controller {
+    public function index()
+	{
+                $modello = new Prova();
+                $saluto = $modello->saluta("Massy");
+                //$saluto = "ciao ila";
+		return view('prova', array('saluto' => $saluto));
+	}
     //put your code here
 }
