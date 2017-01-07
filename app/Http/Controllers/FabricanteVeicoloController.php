@@ -4,17 +4,18 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Fabricante;
-class FabricanteController extends Controller {
 
+class FabricanteVeicoloController extends Controller {
+
+    
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($id)
 	{
-		return response()->json(['datos' => Fabricante::all()],200);
+		return 'Mostra tutti i veicoli del fabricante con id '.$id;
 	}
 
 	/**
@@ -22,9 +23,9 @@ class FabricanteController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
-		return 'qui ci sarà il form per creare il fabricante';
+		return 'mostra form per aggregare un veicolo al fornitore con id'.$id;
 	}
 
 	/**
@@ -43,14 +44,9 @@ class FabricanteController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($idFabricante, $idVeicolo)
 	{
-                $fabricante = Fabricante::find($id);
-                if(!$fabricante)
-                {
-                    return response()->json(['messaggio' => "Non vi è alcun fabricante con quell'id", 'cod'=> 404],404);
-                }
-		return response()->json(['datos' => $fabricante],200);
+		return 'Mostra il veicolo '.$idVeicolo.' del fabricante '.$idFabricante;
 	}
 
 	/**
@@ -59,9 +55,9 @@ class FabricanteController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($idFabricante, $idVeicolo)
 	{
-		return 'modifichiamo un fabricante con id '.$id;
+		return 'modificare veicolo '.$idVeicolo.' del fabricante '.$idFabricante;
 	}
 
 	/**
@@ -70,7 +66,7 @@ class FabricanteController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($idFabricante, $idVeicolo)
 	{
 		//
 	}
@@ -81,7 +77,7 @@ class FabricanteController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($idFabricante, $idVeicolo)
 	{
 		//
 	}
