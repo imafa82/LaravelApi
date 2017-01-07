@@ -14,7 +14,7 @@ class FabricanteController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		return 'mostra tutti i fabricanti';
 	}
 
 	/**
@@ -24,7 +24,7 @@ class FabricanteController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return 'qui ci sarà il form per creare il fabricante';
 	}
 
 	/**
@@ -45,7 +45,7 @@ class FabricanteController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		return 'mostra un fabricante con id '.$id;
 	}
 
 	/**
@@ -56,7 +56,7 @@ class FabricanteController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		return 'modifichiamo un fabricante con id '.$id;
 	}
 
 	/**

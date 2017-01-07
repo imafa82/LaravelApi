@@ -7,14 +7,17 @@ use Illuminate\Http\Request;
 
 class VeicoloController extends Controller {
 
+    public function showAll() {
+        return 'mostra tutti i veicoli';
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($id)
 	{
-		//
+		return 'Mostra tutti i veicoli del fabricante con id '.$id;
 	}
 
 	/**
@@ -22,9 +25,9 @@ class VeicoloController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
-		//
+		return 'mostra form per aggregare un veicolo al fornitore con id'.$id;
 	}
 
 	/**
@@ -43,9 +46,9 @@ class VeicoloController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($idFabricante, $idVeicolo)
 	{
-		//
+		return 'Mostra il veicolo '.$idVeicolo.' del fabricante '.$idFabricante;
 	}
 
 	/**
@@ -54,9 +57,9 @@ class VeicoloController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($idFabricante, $idVeicolo)
 	{
-		//
+		return 'modificare veicolo '.$idVeicolo.' del fabricante '.$idFabricante;
 	}
 
 	/**
@@ -65,7 +68,7 @@ class VeicoloController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($idFabricante, $idVeicolo)
 	{
 		//
 	}
@@ -76,7 +79,7 @@ class VeicoloController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($idFabricante, $idVeicolo)
 	{
 		//
 	}
