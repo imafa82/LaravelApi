@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @author Massy
  */
-class veicolo  extends Model {
+class Veicolo  extends Model {
     //put your code here
     protected $table = 'veicoli';
     
