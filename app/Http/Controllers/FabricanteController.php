@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Fabricante;
 class FabricanteController extends Controller {
 
+         public function __construct(){
+            $this->middleware('auth.basic', ['only' => ['index', 'store', 'update', 'destroy'] ]);
+        }
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,27 +17,23 @@ class FabricanteController extends Controller {
 	 */
 	public function index()
 	{
-		return response()->json(['datos' => Fabricante::all()],200);
+		return response()->json(['data' => Fabricante::all()],200);
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return 'qui ci sarà il form per creare il fabricante';
-	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+            if(!$request->input('nome') || !$request->input('telefono')){
+                return response()->json(['messaggio' => "Manca un dato necessario", 'cod'=> 422],422);
+            }
+            
+            Fabricante::create($request->all());
+            return response()->json(['messaggio' => "Fabricante inserito con successo"],201);
 	}
 
 	/**
@@ -50,19 +49,10 @@ class FabricanteController extends Controller {
                 {
                     return response()->json(['messaggio' => "Non vi è alcun fabricante con quell'id", 'cod'=> 404],404);
                 }
-		return response()->json(['datos' => $fabricante],200);
+		return response()->json(['data' => $fabricante],200);
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		return 'modifichiamo un fabricante con id '.$id;
-	}
+	
 
 	/**
 	 * Update the specified resource in storage.
@@ -72,7 +62,7 @@ class FabricanteController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		return "update";
 	}
 
 	/**

@@ -11,6 +11,6 @@ class Fabricante extends Model{
     protected $hidden = ['created_at', 'updated_at'];
     
     public function veicoli(){
-        $this->hasMany('veicolo');
+        return $this->hasMany('App\Veicolo');
     }
 }

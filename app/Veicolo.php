@@ -20,6 +20,6 @@ class Veicolo  extends Model {
     protected $hidden = ['created_at', 'updated_at'];
     
     public function fabricante(){
-        $this->belongsTo('Fabricante');
+        return $this->belongsTo('App\Fabricante');
     }
 }
