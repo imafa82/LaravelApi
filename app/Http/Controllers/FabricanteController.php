@@ -80,7 +80,7 @@ class FabricanteController extends Controller {
                 $fabricante->telefono = $tel;
                 }
                 $fabricante->save();
-                return "update con patch";
+                return "update con patch"; 
             } 
             if (!$nome || !$tel){
                 return response()->json(['messaggio' => "Manca un dato fondamentale", 'cod'=> 422],422);
