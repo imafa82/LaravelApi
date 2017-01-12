@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Fabricante;
 class FabricanteController extends Controller {
 
@@ -17,7 +18,10 @@ class FabricanteController extends Controller {
 	 */
 	public function index()
 	{
-		return response()->json(['data' => Fabricante::all()],200);
+            $fabricanti = Cache::remember('fabricanti', 15/60, function(){
+                return Fabricante::SimplePaginate(15);
+            });
+		return response()->json(['next' => $fabricanti->nextPageUrl(), 'prev' => $fabricanti->previousPageUrl(), 'data' => $fabricanti->items()],200);
 	}
 
 
