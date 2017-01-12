@@ -28,15 +28,7 @@ class FabricanteVeicoloController extends Controller {
 		return response()->json(['data' => $fabricante->veicoli], 200);
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create($id)
-	{
-		return 'mostra form per aggregare un veicolo al fornitore con id'.$id;
-	}
+	
 
 	/**
 	 * Store a newly created resource in storage.
@@ -64,27 +56,9 @@ class FabricanteVeicoloController extends Controller {
             
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($idFabricante, $idVeicolo)
-	{
-		return 'Mostra il veicolo '.$idVeicolo.' del fabricante '.$idFabricante;
-	}
+	
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($idFabricante, $idVeicolo)
-	{
-		return 'modificare veicolo '.$idVeicolo.' del fabricante '.$idFabricante;
-	}
+	
 
 	/**
 	 * Update the specified resource in storage.
@@ -92,9 +66,53 @@ class FabricanteVeicoloController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($idFabricante, $idVeicolo)
+	public function update(Request $request, $idFabricante, $idVeicolo)
 	{
-		//
+		 $metodo= $request->method();
+            $fabricante= Fabricante::find($idFabricante);
+            if(!$fabricante){
+                return response()->json(['messaggio' => "Non vi è alcun fabricante con quell'id", 'cod'=> 404],404);
+            }
+            $veicolo = $fabricante->veicoli()->find($idVeicolo);
+            if(!$veicolo){
+                return response()->json(['messaggio' => "Non vi è alcun veicolo associato a quel fabricante", 'cod'=> 404],404);
+            }
+            $colore = $request->input('colore');
+            $cilindrata = $request->input('cilindrata');
+            $potenza = $request->input('potenza');
+            $peso = $request->input('peso');
+            if($metodo === "PATCH"){
+                
+                
+                if($colore != null && $colore != ''){
+                $veicolo->colore = $colore;
+                }
+                
+                if($cilindrata != null && $cilindrata != ''){
+                $veicolo->cilindrata = $cilindrata;
+                }
+                
+                 if($potenza != null && $potenza != ''){
+                $veicolo->potenza = $potenza;
+                }
+                
+                 if($peso != null && $peso != ''){
+                $veicolo->peso = $peso;
+                }
+                $veicolo->save();
+
+                return response()->json(['messaggio' => "Veicolo modificato con successo"],200);
+
+            } 
+            if (!$colore || !$cilindrata || !$potenza || !$peso){
+                return response()->json(['messaggio' => "Manca un dato fondamentale", 'cod'=> 422],422);
+            }
+             $veicolo->colore = $colore;
+             $veicolo->cilindrata = $cilindrata;
+             $veicolo->potenza = $potenza;
+             $veicolo->peso = $peso;
+            $veicolo->save();
+		return response()->json(['messaggio' => "Veicolo modificato con successo"],200);
 	}
 
 	/**
@@ -105,7 +123,16 @@ class FabricanteVeicoloController extends Controller {
 	 */
 	public function destroy($idFabricante, $idVeicolo)
 	{
-		//
+            $fabricante = Fabricante::find($idFabricante);
+             if(!$fabricante){
+                return response()->json(['messaggio' => "Non vi è alcun fabricante con quell'id", 'cod'=> 404],404);
+            }
+            $veicolo = $fabricante->veicoli()->find($idVeicolo);
+            if(!$veicolo){
+                return response()->json(['messaggio' => "Non vi è alcun veicolo associato a quel fabricante", 'cod'=> 404],404);
+            }
+            $veicolo->delete();
+		return response()->json(['messaggio' => "Veicolo eliminato con successo"],200);
 	}
 
 }
